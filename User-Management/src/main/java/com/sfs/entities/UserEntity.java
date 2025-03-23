@@ -10,6 +10,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,15 +24,27 @@ public class UserEntity {
 	private String userName;
 	@Column(unique = true)
 	private String userEmail;
+	private String userPhno;
+	private String password;
+	private String reset_pwd;
 	
-	private String country;
-	private String state;
-	private String city;
+	@ManyToOne
+	@JoinColumn(name = "countryId", referencedColumnName = "countryId")
+	private CountryEntity country;
+	@ManyToOne
+	@JoinColumn(name = "stateId", referencedColumnName = "stateId")
+	private StateEntity state;
+	@ManyToOne
+	@JoinColumn(name = "cityId", referencedColumnName = "cityId")
+	private CityEntity city;
 	
 	@CreationTimestamp
+	@Column(updatable = false)
 	private LocalDate creationTime;
 	@UpdateTimestamp
+	@Column(insertable = false)
 	private LocalDate updationTime;
+	
 	public Integer getUserId() {
 		return userId;
 	}
@@ -49,22 +63,40 @@ public class UserEntity {
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
 	}
-	public String getCountry() {
+	public String getUserPhno() {
+		return userPhno;
+	}
+	public void setUserPhno(String userPhno) {
+		this.userPhno = userPhno;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getReset_pwd() {
+		return reset_pwd;
+	}
+	public void setReset_pwd(String reset_pwd) {
+		this.reset_pwd = reset_pwd;
+	}
+	public CountryEntity getCountry() {
 		return country;
 	}
-	public void setCountry(String country) {
+	public void setCountry(CountryEntity country) {
 		this.country = country;
 	}
-	public String getState() {
+	public StateEntity getState() {
 		return state;
 	}
-	public void setState(String state) {
+	public void setState(StateEntity state) {
 		this.state = state;
 	}
-	public String getCity() {
+	public CityEntity getCity() {
 		return city;
 	}
-	public void setCity(String city) {
+	public void setCity(CityEntity city) {
 		this.city = city;
 	}
 	public LocalDate getCreationTime() {
@@ -81,11 +113,8 @@ public class UserEntity {
 	}
 	@Override
 	public String toString() {
-		return "UserEntity [userId=" + userId + ", userName=" + userName + ", userEmail=" + userEmail + ", country="
-				+ country + ", state=" + state + ", city=" + city + ", creationTime=" + creationTime + ", updationTime="
-				+ updationTime + "]";
+		return "UserEntity [userId=" + userId + ", userName=" + userName + ", userEmail=" + userEmail + ", userPhno="
+				+ userPhno + ", password=" + password + ", reset_pwd=" + reset_pwd + ", country=" + country + ", state="
+				+ state + ", city=" + city + ", creationTime=" + creationTime + ", updationTime=" + updationTime + "]";
 	}
-	
-	
-	
 }
