@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.sfs.dto.LoginFormDTO;
 import com.sfs.dto.RegisterFormDTO;
-import com.sfs.dto.ResetPwtFormDTO;
+import com.sfs.dto.ResetPwdFormDTO;
 import com.sfs.dto.UserDTO;
 
 public interface UserService {
@@ -21,6 +21,6 @@ public interface UserService {
 	
 	public UserDTO login(LoginFormDTO dto);
 	
-	public boolean resetPwd(ResetPwtFormDTO dto);
+	public boolean resetPwd(ResetPwdFormDTO dto);
 
 }

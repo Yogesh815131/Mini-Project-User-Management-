@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.sfs.dto.LoginFormDTO;
 import com.sfs.dto.RegisterFormDTO;
-import com.sfs.dto.ResetPwtFormDTO;
+import com.sfs.dto.ResetPwdFormDTO;
 import com.sfs.dto.UserDTO;
 import com.sfs.entities.CityEntity;
 import com.sfs.entities.CountryEntity;
@@ -144,7 +144,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean resetPwd(ResetPwtFormDTO dto) {
+	public boolean resetPwd(ResetPwdFormDTO dto) {
 		UserEntity userEntity = userRepo.findByUserEmail(dto.getUserEmail());
 		userEntity.setPassword(dto.getNewPwd());
 		userEntity.setReset_pwd("Yes");

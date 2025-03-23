@@ -1,6 +1,6 @@
 package com.sfs.dto;
 
-public class ResetPwtFormDTO {
+public class ResetPwdFormDTO {
 	
 	private String userEmail;
 	private String oldPwd;
