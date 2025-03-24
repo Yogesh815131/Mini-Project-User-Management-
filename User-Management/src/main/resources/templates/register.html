@@ -9,6 +9,51 @@
 	rel="stylesheet"
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 	crossorigin="anonymous">
+	
+	<script src="/webjars/jquery/3.6.3/jquery.min.js"></script>
+	
+	<script>
+		$(document).ready(function(){
+			$("#countryId").on("change", function(){
+				var cid = $("#countryId").val();
+				
+				$('#stateId').find('option').remove();
+				$('<option>').val('').text('-Select-').appendTo('#stateId');
+				
+				$('#cityId').find('option').remove();
+				$('<option>').val('').text('-Select-').appendTo('#cityId');
+				
+				$.ajax({
+					type: 'GET',
+					url: '/states/' + cid,
+					success: function (response){
+						$.each(response, function(key, value){
+							$('<option>').val(key).text(value).appendTo("#stateId");
+						})
+					}
+				})
+			})
+			
+			$("#stateId").on("change", function(){
+				var sid = $('#stateId').val();
+				console.log(sid);
+				
+				$('#cityId').find('option').remove();
+				$('<option>').val('').text('-Select-').appendTo('#cityId');
+				
+				$.ajax({
+					type: 'GET',
+					url: '/cities/' + sid,
+					success: function (response){
+						$.each(response, function(key, value){
+							$('<option>').val(key).text(value).appendTo("#cityId");
+						})
+					}
+				})
+			})
+		})
+	</script>
+	
 </head>
 <body>
 
@@ -60,7 +105,7 @@
 
 
 				<tr>
-					<td><input type="submit" value="Login"></td>
+					<td><input type="submit" value="Register"></td>
 				</tr>
 			</table>
 		</form>
